@@ -37,3 +37,11 @@ class Client {
             pet.type = new_type;
         }
 };
+
+vector<Client> client_list{};
+
+void register_client(Client&);
+void register_pet();
+void remove_client();
+void show_client();
+Client& get_client_by_index(int);
