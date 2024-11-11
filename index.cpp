@@ -47,7 +47,40 @@ void show_client();
 Client& get_client_by_index(int);
 
 int main() {
+    int option;
+    do {
+        cout << "1. Registrar cliente\n2. Registrar mascota\n3. Eliminar cliente\n4. Mostrar clientes\n5. Salir\n";
+        cout << "Opcion: ";
+        cin >> option;
 
+        switch (option) {
+            case 1: {
+                string name, last_name, email;
+                int phone;
+                cout << "Nombre, apellido, email y telefono: ";
+                cin >> name >> last_name >> email >> phone;
+                Client client(name, last_name, email, phone);
+                register_client(client);
+                break;
+            }
+            case 2:
+                register_pet();
+                break;
+            case 3:
+                remove_client();
+                break;
+            case 4:
+                show_client();
+                break;
+            case 5:
+                cout << "Saliendo...\n";
+                break;
+            default:
+                cout << "Opcion invalida.\n";
+        }
+    } while (option != 5);
+
+    return 0;
 }
 
 void register_client(Client& client) {
