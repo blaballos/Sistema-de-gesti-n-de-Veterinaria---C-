@@ -45,3 +45,60 @@ void register_pet();
 void remove_client();
 void show_client();
 Client& get_client_by_index(int);
+
+int main() {
+
+}
+
+void register_client(Client& client) {
+    client_list.push_back(client);
+    cout << client.getName() << " " << client.getLastName() << " fue registrado correctamente.\n";
+}
+
+void register_pet() {
+    show_client();
+    int index;
+    cout << "Que usuario desea modificar (ingrese su numero en lista): ";
+    cin >> index;
+
+    Client& client = get_client_by_index(index - 1);
+
+    string namePet, type;
+    cout << "Nombre y tipo de mascota: ";
+    cin >> namePet >> type;
+    client.setPetInfo(namePet, type);
+    cout << "Tu mascota " << namePet << " fue registrado correctamente.\n";
+}
+
+void remove_client() {
+    show_client();
+    int index;
+    cout << "Que usuario desea eliminar (ingrese su numero en lista): ";
+    cin >> index;
+
+    if (index - 1 < 0 || index - 1 >= client_list.size()) {
+        cout << "Indice de cliente invalido.\n";
+    }
+    client_list.erase(client_list.begin() + index - 1);
+}
+
+void show_client() {
+    if (client_list.empty()) {
+        cout << "No hay clientes registrados.\n";
+    } else {
+        int index = 1;
+        cout << "Lista de clientes:\n" ;
+        for (const auto& client : client_list) {
+            cout << index << " " << client.getName() << " - " << client.getLastName()
+                    << " - " << client.getEmail() << " - " << client.getPetInfo() << "\n";
+            index++;
+        }
+    }
+}
+
+Client& get_client_by_index(int index) {
+    if (index < 0 || index  >= client_list.size()) {
+        cout << "Indice de cliente invalido.\n";
+    }
+    return client_list[index];
+}
